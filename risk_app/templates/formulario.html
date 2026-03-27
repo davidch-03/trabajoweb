@@ -10,13 +10,30 @@
             display: flex;
             flex-direction: column;
             min-height: 100vh;
+            background-color: #f4f6f9;
         }
         main {
             flex: 1;
         }
+        .card {
+            border: none;
+            border-radius: 12px;
+        }
+        .card-header {
+            border-top-left-radius: 12px !important;
+            border-top-right-radius: 12px !important;
+        }
+        .form-control {
+            border-radius: 8px;
+            background-color: #f8f9fa;
+        }
+        .form-control:focus {
+            background-color: #ffffff;
+            box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.15);
+        }
     </style>
 </head>
-<body class="bg-light">
+<body>
 
     <header class="bg-dark py-3 shadow-sm">
         <div class="container">
@@ -26,57 +43,57 @@
 
     <main class="container mt-5 mb-5">
         <div class="row justify-content-center">
-            <div class="col-md-8">
-                <div class="card shadow">
-                    <div class="card-header bg-primary text-white">
-                        <h4 class="mb-0">Datos del Solicitante</h4>
+            <div class="col-md-10">
+                <div class="card shadow-lg">
+                    <div class="card-header bg-primary text-white py-3">
+                        <h4 class="mb-0">Formulario de Datos del Solicitante</h4>
                     </div>
-                    <div class="card-body">
+                    <div class="card-body p-4">
                         <form id="riesgoForm" method="POST">
                             {% csrf_token %}
-                            <div class="row g-3">
+                            <div class="row g-4">
                                 <div class="col-md-6">
-                                    <label class="form-label">Utilización de Líneas No Garantizadas</label>
-                                    <input type="number" step="0.0001" class="form-control" name="RevolvingUtilizationOfUnsecuredLines" placeholder="Ej: 0.25" required>
+                                    <label class="form-label text-muted fw-semibold">Utilización de Líneas No Garantizadas</label>
+                                    <input type="number" step="0.0001" class="form-control form-control-lg" name="RevolvingUtilizationOfUnsecuredLines" placeholder="Ej: 0.25" required>
                                 </div>
                                 <div class="col-md-6">
-                                    <label class="form-label">Edad</label>
-                                    <input type="number" class="form-control" name="age" placeholder="Ej: 45" required>
+                                    <label class="form-label text-muted fw-semibold">Edad</label>
+                                    <input type="number" class="form-control form-control-lg" name="age" placeholder="Ej: 45" required>
                                 </div>
                                 <div class="col-md-6">
-                                    <label class="form-label">Veces 30-59 Días Atrasado</label>
-                                    <input type="number" class="form-control" name="NumberOfTime30-59DaysPastDueNotWorse" placeholder="Ej: 1" required>
+                                    <label class="form-label text-muted fw-semibold">Veces 30-59 Días Atrasado</label>
+                                    <input type="number" class="form-control form-control-lg" name="NumberOfTime30-59DaysPastDueNotWorse" placeholder="Ej: 1" required>
                                 </div>
                                 <div class="col-md-6">
-                                    <label class="form-label">Ratio de Deuda</label>
-                                    <input type="number" step="0.0001" class="form-control" name="DebtRatio" placeholder="Ej: 0.35" required>
+                                    <label class="form-label text-muted fw-semibold">Ratio de Deuda</label>
+                                    <input type="number" step="0.0001" class="form-control form-control-lg" name="DebtRatio" placeholder="Ej: 0.35" required>
                                 </div>
                                 <div class="col-md-6">
-                                    <label class="form-label">Ingreso Mensual</label>
-                                    <input type="number" step="0.01" class="form-control" name="MonthlyIncome" placeholder="Ej: 5000.00" required>
+                                    <label class="form-label text-muted fw-semibold">Ingreso Mensual</label>
+                                    <input type="number" step="0.01" class="form-control form-control-lg" name="MonthlyIncome" placeholder="Ej: 5000.00" required>
                                 </div>
                                 <div class="col-md-6">
-                                    <label class="form-label">Líneas de Crédito Abiertas</label>
-                                    <input type="number" class="form-control" name="NumberOfOpenCreditLinesAndLoans" placeholder="Ej: 4" required>
+                                    <label class="form-label text-muted fw-semibold">Líneas de Crédito Abiertas</label>
+                                    <input type="number" class="form-control form-control-lg" name="NumberOfOpenCreditLinesAndLoans" placeholder="Ej: 4" required>
                                 </div>
                                 <div class="col-md-6">
-                                    <label class="form-label">Veces 90 Días Atrasado</label>
-                                    <input type="number" class="form-control" name="NumberOfTimes90DaysLate" placeholder="Ej: 0" required>
+                                    <label class="form-label text-muted fw-semibold">Veces 90 Días Atrasado</label>
+                                    <input type="number" class="form-control form-control-lg" name="NumberOfTimes90DaysLate" placeholder="Ej: 0" required>
                                 </div>
                                 <div class="col-md-6">
-                                    <label class="form-label">Préstamos Inmobiliarios</label>
-                                    <input type="number" class="form-control" name="NumberRealEstateLoansOrLines" placeholder="Ej: 1" required>
+                                    <label class="form-label text-muted fw-semibold">Préstamos Inmobiliarios</label>
+                                    <input type="number" class="form-control form-control-lg" name="NumberRealEstateLoansOrLines" placeholder="Ej: 1" required>
                                 </div>
                                 <div class="col-md-6">
-                                    <label class="form-label">Veces 60-89 Días Atrasado</label>
-                                    <input type="number" class="form-control" name="NumberOfTime60-89DaysPastDueNotWorse" placeholder="Ej: 0" required>
+                                    <label class="form-label text-muted fw-semibold">Veces 60-89 Días Atrasado</label>
+                                    <input type="number" class="form-control form-control-lg" name="NumberOfTime60-89DaysPastDueNotWorse" placeholder="Ej: 0" required>
                                 </div>
                                 <div class="col-md-6">
-                                    <label class="form-label">Número de Dependientes</label>
-                                    <input type="number" class="form-control" name="NumberOfDependents" placeholder="Ej: 2" required>
+                                    <label class="form-label text-muted fw-semibold">Número de Dependientes</label>
+                                    <input type="number" class="form-control form-control-lg" name="NumberOfDependents" placeholder="Ej: 2" required>
                                 </div>
-                                <div class="col-12 mt-4 text-center">
-                                    <button type="submit" class="btn btn-primary px-5">Evaluar Crédito</button>
+                                <div class="col-12 mt-5 text-center">
+                                    <button type="submit" class="btn btn-primary btn-lg px-5 shadow-sm">Evaluar Crédito</button>
                                 </div>
                             </div>
                         </form>
@@ -92,11 +109,27 @@
         </div>
     </footer>
 
+    <div class="modal fade" id="resultadoModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content border-0 shadow">
+                <div class="modal-header border-0">
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body text-center px-4 pb-5">
+                    <div id="modalAlert" class="alert py-4 mb-4">
+                        <h2 class="display-6 fw-bold mb-3" id="modalResultadoText"></h2>
+                        <p class="lead mb-0">La probabilidad estimada de impago es del <span id="modalProbabilidadText" class="fw-bold"></span>%</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.5/dist/jquery.validate.min.js"></script>
     <script>
         $(document).ready(function() {
-            // Reglas de validación personalizadas
             $("#riesgoForm").validate({
                 rules: {
                     RevolvingUtilizationOfUnsecuredLines: { required: true, min: 0 },
@@ -111,56 +144,37 @@
                     NumberOfDependents: { required: true, min: 0, digits: true }
                 },
                 messages: {
-                    RevolvingUtilizationOfUnsecuredLines: {
-                        required: "Campo requerido",
-                        min: "No puede ser negativo"
-                    },
-                    age: {
-                        required: "Campo requerido",
-                        min: "Debe ser mayor de 18 años",
-                        digits: "Ingrese un número entero"
-                    },
-                    "NumberOfTime30-59DaysPastDueNotWorse": {
-                        required: "Campo requerido",
-                        min: "No puede ser negativo",
-                        digits: "Ingrese un número entero"
-                    },
-                    DebtRatio: {
-                        required: "Campo requerido",
-                        min: "No puede ser negativo"
-                    },
-                    MonthlyIncome: {
-                        required: "Campo requerido",
-                        min: "No puede ser negativo"
-                    },
-                    NumberOfOpenCreditLinesAndLoans: {
-                        required: "Campo requerido",
-                        min: "No puede ser negativo",
-                        digits: "Ingrese un número entero"
-                    },
-                    NumberOfTimes90DaysLate: {
-                        required: "Campo requerido",
-                        min: "No puede ser negativo",
-                        digits: "Ingrese un número entero"
-                    },
-                    NumberRealEstateLoansOrLines: {
-                        required: "Campo requerido",
-                        min: "No puede ser negativo",
-                        digits: "Ingrese un número entero"
-                    },
-                    "NumberOfTime60-89DaysPastDueNotWorse": {
-                        required: "Campo requerido",
-                        min: "No puede ser negativo",
-                        digits: "Ingrese un número entero"
-                    },
-                    NumberOfDependents: {
-                        required: "Campo requerido",
-                        min: "No puede ser negativo",
-                        digits: "Ingrese un número entero"
-                    }
+                    RevolvingUtilizationOfUnsecuredLines: { required: "Campo requerido", min: "No puede ser negativo" },
+                    age: { required: "Campo requerido", min: "Debe ser mayor de 18 años", digits: "Ingrese un número entero" },
+                    "NumberOfTime30-59DaysPastDueNotWorse": { required: "Campo requerido", min: "No puede ser negativo", digits: "Ingrese un número entero" },
+                    DebtRatio: { required: "Campo requerido", min: "No puede ser negativo" },
+                    MonthlyIncome: { required: "Campo requerido", min: "No puede ser negativo" },
+                    NumberOfOpenCreditLinesAndLoans: { required: "Campo requerido", min: "No puede ser negativo", digits: "Ingrese un número entero" },
+                    NumberOfTimes90DaysLate: { required: "Campo requerido", min: "No puede ser negativo", digits: "Ingrese un número entero" },
+                    NumberRealEstateLoansOrLines: { required: "Campo requerido", min: "No puede ser negativo", digits: "Ingrese un número entero" },
+                    "NumberOfTime60-89DaysPastDueNotWorse": { required: "Campo requerido", min: "No puede ser negativo", digits: "Ingrese un número entero" },
+                    NumberOfDependents: { required: "Campo requerido", min: "No puede ser negativo", digits: "Ingrese un número entero" }
                 },
                 errorElement: "div",
-                errorClass: "text-danger mt-1 small"
+                errorClass: "text-danger mt-1 small",
+                submitHandler: function(form) {
+                    $.ajax({
+                        type: "POST",
+                        url: window.location.href,
+                        data: $(form).serialize(),
+                        success: function(response) {
+                            $("#modalAlert").removeClass("alert-success alert-danger").addClass("alert-" + response.clase);
+                            $("#modalResultadoText").text(response.resultado);
+                            $("#modalProbabilidadText").text(response.probabilidad);
+                            var modal = new bootstrap.Modal(document.getElementById('resultadoModal'));
+                            modal.show();
+                        },
+                        error: function() {
+                            alert("Error al procesar la solicitud.");
+                        }
+                    });
+                    return false;
+                }
             });
         });
     </script>

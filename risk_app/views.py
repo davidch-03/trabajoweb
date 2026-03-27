@@ -1,6 +1,7 @@
 import joblib
 import pandas as pd
 from django.shortcuts import render
+from django.http import JsonResponse
 
 modelo = joblib.load('modelos/calibrated_xgb_model.joblib')
 scaler = joblib.load('modelos/feature_scaler.joblib')
@@ -43,7 +44,7 @@ def evaluar_riesgo(request):
         es_riesgoso = probabilidad >= 0.10
         resultado = "CRÉDITO RECHAZADO" if es_riesgoso else "CRÉDITO APROBADO"
 
-        return render(request, 'resultado.html', {
+        return JsonResponse({
             'resultado': resultado,
             'probabilidad': round(probabilidad * 100, 2),
             'clase': 'danger' if es_riesgoso else 'success'
