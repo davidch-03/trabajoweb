@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Evaluación de Riesgo Crediticio</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+        main {
+            flex: 1;
+        }
+    </style>
+</head>
+<body class="bg-light">
+
+    <header class="bg-dark py-3 shadow-sm">
+        <div class="container">
+            <h1 class="h4 text-white mb-0">Sistema de Evaluación Crediticia</h1>
+        </div>
+    </header>
+
+    <main class="container mt-5 mb-5">
+        <div class="row justify-content-center">
+            <div class="col-md-8">
+                <div class="card shadow">
+                    <div class="card-header bg-primary text-white">
+                        <h4 class="mb-0">Datos del Solicitante</h4>
+                    </div>
+                    <div class="card-body">
+                        <form id="riesgoForm" method="POST">
+                            {% csrf_token %}
+                            <div class="row g-3">
+                                <div class="col-md-6">
+                                    <label class="form-label">Utilización de Líneas No Garantizadas</label>
+                                    <input type="number" step="0.0001" class="form-control" name="RevolvingUtilizationOfUnsecuredLines" placeholder="Ej: 0.25" required>
+                                </div>
+                                <div class="col-md-6">
+                                    <label class="form-label">Edad</label>
+                                    <input type="number" class="form-control" name="age" placeholder="Ej: 45" required>
+                                </div>
+                                <div class="col-md-6">
+                                    <label class="form-label">Veces 30-59 Días Atrasado</label>
+                                    <input type="number" class="form-control" name="NumberOfTime30-59DaysPastDueNotWorse" placeholder="Ej: 1" required>
+                                </div>
+                                <div class="col-md-6">
+                                    <label class="form-label">Ratio de Deuda</label>
+                                    <input type="number" step="0.0001" class="form-control" name="DebtRatio" placeholder="Ej: 0.35" required>
+                                </div>
+                                <div class="col-md-6">
+                                    <label class="form-label">Ingreso Mensual</label>
+                                    <input type="number" step="0.01" class="form-control" name="MonthlyIncome" placeholder="Ej: 5000.00" required>
+                                </div>
+                                <div class="col-md-6">
+                                    <label class="form-label">Líneas de Crédito Abiertas</label>
+                                    <input type="number" class="form-control" name="NumberOfOpenCreditLinesAndLoans" placeholder="Ej: 4" required>
+                                </div>
+                                <div class="col-md-6">
+                                    <label class="form-label">Veces 90 Días Atrasado</label>
+                                    <input type="number" class="form-control" name="NumberOfTimes90DaysLate" placeholder="Ej: 0" required>
+                                </div>
+                                <div class="col-md-6">
+                                    <label class="form-label">Préstamos Inmobiliarios</label>
+                                    <input type="number" class="form-control" name="NumberRealEstateLoansOrLines" placeholder="Ej: 1" required>
+                                </div>
+                                <div class="col-md-6">
+                                    <label class="form-label">Veces 60-89 Días Atrasado</label>
+                                    <input type="number" class="form-control" name="NumberOfTime60-89DaysPastDueNotWorse" placeholder="Ej: 0" required>
+                                </div>
+                                <div class="col-md-6">
+                                    <label class="form-label">Número de Dependientes</label>
+                                    <input type="number" class="form-control" name="NumberOfDependents" placeholder="Ej: 2" required>
+                                </div>
+                                <div class="col-12 mt-4 text-center">
+                                    <button type="submit" class="btn btn-primary px-5">Evaluar Crédito</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="bg-dark py-3 text-center text-white mt-auto">
+        <div class="container">
+            <p class="mb-0">Proyecto de Riesgo Crediticio - 2026</p>
+        </div>
+    </footer>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.5/dist/jquery.validate.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            // Reglas de validación personalizadas
+            $("#riesgoForm").validate({
+                rules: {
+                    RevolvingUtilizationOfUnsecuredLines: { required: true, min: 0 },
+                    age: { required: true, min: 18, digits: true },
+                    "NumberOfTime30-59DaysPastDueNotWorse": { required: true, min: 0, digits: true },
+                    DebtRatio: { required: true, min: 0 },
+                    MonthlyIncome: { required: true, min: 0 },
+                    NumberOfOpenCreditLinesAndLoans: { required: true, min: 0, digits: true },
+                    NumberOfTimes90DaysLate: { required: true, min: 0, digits: true },
+                    NumberRealEstateLoansOrLines: { required: true, min: 0, digits: true },
+                    "NumberOfTime60-89DaysPastDueNotWorse": { required: true, min: 0, digits: true },
+                    NumberOfDependents: { required: true, min: 0, digits: true }
+                },
+                messages: {
+                    RevolvingUtilizationOfUnsecuredLines: {
+                        required: "Campo requerido",
+                        min: "No puede ser negativo"
+                    },
+                    age: {
+                        required: "Campo requerido",
+                        min: "Debe ser mayor de 18 años",
+                        digits: "Ingrese un número entero"
+                    },
+                    "NumberOfTime30-59DaysPastDueNotWorse": {
+                        required: "Campo requerido",
+                        min: "No puede ser negativo",
+                        digits: "Ingrese un número entero"
+                    },
+                    DebtRatio: {
+                        required: "Campo requerido",
+                        min: "No puede ser negativo"
+                    },
+                    MonthlyIncome: {
+                        required: "Campo requerido",
+                        min: "No puede ser negativo"
+                    },
+                    NumberOfOpenCreditLinesAndLoans: {
+                        required: "Campo requerido",
+                        min: "No puede ser negativo",
+                        digits: "Ingrese un número entero"
+                    },
+                    NumberOfTimes90DaysLate: {
+                        required: "Campo requerido",
+                        min: "No puede ser negativo",
+                        digits: "Ingrese un número entero"
+                    },
+                    NumberRealEstateLoansOrLines: {
+                        required: "Campo requerido",
+                        min: "No puede ser negativo",
+                        digits: "Ingrese un número entero"
+                    },
+                    "NumberOfTime60-89DaysPastDueNotWorse": {
+                        required: "Campo requerido",
+                        min: "No puede ser negativo",
+                        digits: "Ingrese un número entero"
+                    },
+                    NumberOfDependents: {
+                        required: "Campo requerido",
+                        min: "No puede ser negativo",
+                        digits: "Ingrese un número entero"
+                    }
+                },
+                errorElement: "div",
+                errorClass: "text-danger mt-1 small"
+            });
+        });
+    </script>
+</body>
+</html>
